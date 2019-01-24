@@ -13,7 +13,7 @@ Atualmente apenas o banco Sicredi é suportado na modalidade TED – Transferên
 Via composer:
 
 ```
-composer require murilosandiego/pagamento
+composer require murilosandiego/pagamento:dev-master
 ```
 
 Ou adicione manualmente ao seu composer.json:
@@ -58,7 +58,7 @@ $favorecido = new \Murilo\Pagamento\Pessoa(
 ### Criando o pagamento
 
 ```php
-$pagamento = new Murilo\Pagamento\Pagamento\Banco\Sicredi(
+$pagamento = new \Murilo\Pagamento\Pagamento\Banco\Sicredi(
     [
         'data' => new \Carbon\Carbon(),
         'finalidade' => '00011',
@@ -93,12 +93,12 @@ $remessa = new \Murilo\Pagamento\Cnab\Remessa\Cnab240\Banco\Sicredi(
 // Adicionar um pagamento
 $remessa->addPagamento($pagamento);
 
-// Ou para adicionar um array de boletos
+// Ou para adicionar um array de pagamentos
 $pagamentos = [];
 $pagamentos[] = $pagamento1;
 $pagamentos[] = $pagamento2;
 $pagamentos[] = $pagamento3;
-$remessa->addPagamentos($boletos);
+$remessa->addPagamentos($pagamentos);
 
 //Gerar remessa
 echo $remessa->gerar();
