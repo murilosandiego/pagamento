@@ -9,7 +9,7 @@ retorno. Fork do projeto [yii2-boleto-remessa](http://newerton.github.io/yii2-bo
 ## Bancos suportados
 Atualmente apenas o banco Sicredi é suportado na modalidade TED – Transferência entre Clientes;
 
-```
+
 ## Gerar Pagamento
 
 
