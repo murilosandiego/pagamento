@@ -5,8 +5,7 @@
     "murilosandiego",
     "pagamento",
     "remessa",
-    "retorno",
-    "murilosandiego/pagamento"
+    "retorno"
   ],
   "homepage": "https://github.com/murilosandiego/pagamento",
   "license": "MIT",
