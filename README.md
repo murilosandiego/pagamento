@@ -9,6 +9,18 @@ retorno. Fork do projeto [yii2-boleto-remessa](http://newerton.github.io/yii2-bo
 ## Bancos suportados
 Atualmente apenas o banco Sicredi é suportado na modalidade TED – Transferência entre Clientes;
 
+## Instalação
+Via composer:
+
+```
+composer require murilosandiego/pagamento
+```
+
+Ou adicione manualmente ao seu composer.json:
+
+```
+"murilosandiego/pagamento": "dev-master"
+```
 
 ## Gerar Pagamento
 
