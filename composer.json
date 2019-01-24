@@ -1,0 +1,40 @@
+{
+  "name": "murilosandiego/pagamento",
+  "description": "Pacote para gerar pagamentos através de arquivos de remessas e leitura de retorno. Fork do projeto yii2-boleto-remessa",
+  "keywords": [
+    "murilosandiego",
+    "pagamento",
+    "remessa",
+    "retorno",
+    "murilosandiego/pagamento"
+  ],
+  "homepage": "https://github.com/murilosandiego/pagamento",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Murilo Sandiego Ferreira",
+      "email": "contato@murilosandiego.com.br"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "ext-intl": "*",
+    "ext-mbstring": "*",
+    "itbz/fpdf": "^1.7",
+    "nesbot/carbon": "1.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.0",
+    "orchestra/testbench": "3.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Murilo\\Pagamento\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Murilo\\Pagamento\\Tests\\": "tests"
+    }
+  }
+}
