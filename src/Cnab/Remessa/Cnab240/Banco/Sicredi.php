@@ -303,7 +303,6 @@ class Sicredi extends AbstractRemessa implements RemessaContract
         $this->add(18, 18, strlen(Util::onlyNumbers($this->getBeneficiario()->getDocumento())) == 14 ? '2' : '1'); // Tipo de inscrição da empresa
         $this->add(19, 32, Util::formatCnab('9L', $this->getBeneficiario()->getDocumento(), 14)); // Numero de inscrição da empresa
         $this->add(33, 52, Util::formatCnab('X', $this->getCodigoCliente(), 20)); // Código do convênio no banco
-        $this->add(34, 53, ''); // Reservados (Uso Banco)
         $this->add(53, 57, Util::formatCnab('9', $this->getAgencia(), 5)); // Agência mantenedora da conta
         $this->add(58, 58, Util::formatCnab('X', $this->getAgenciaDv(), 1)); // Dígito verificador da agência (Uso Branco)
         $this->add(59, 70, Util::formatCnab('9', $this->getConta(), 12)); // Número da conta corrente

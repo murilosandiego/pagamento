@@ -25,9 +25,6 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
-            <exclude>
-                <directory suffix=".php">./src/Boleto/Render/view</directory>
-            </exclude>
         </whitelist>
     </filter>
     <php>

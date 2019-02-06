@@ -55,4 +55,8 @@ $remessa = new \Murilo\Pagamento\Cnab\Remessa\Cnab240\Banco\Sicredi(
 
 $remessa->addPagamento($pagamento);
 
-echo $remessa->save(__DIR__ . DIRECTORY_SEPARATOR . 'arquivos' . DIRECTORY_SEPARATOR . 'sicredi_pagamento.txt');
+$hoje = new \DateTime();
+
+$nomeclatura = $remessa->getCodigoCliente() . $hoje->format('d') . '1' . '00.REM';
+
+echo $remessa->save(__DIR__ . DIRECTORY_SEPARATOR . 'arquivos' . DIRECTORY_SEPARATOR . $nomeclatura);
