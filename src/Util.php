@@ -676,7 +676,7 @@ final class Util
                 case Contracts\Boleto\Boleto::COD_BANCO_BB:
                     if (self::remove(1, 1, $detalhe) != 7) {
                         unset($retorno[$i]);
-                        continue;
+                        continue 2;
                     }
                     self::adiciona($retorno[$i], 1, 1, '7');
                     self::adiciona($retorno[$i], 64, 80, self::remove(64, 80, $detalhe));
