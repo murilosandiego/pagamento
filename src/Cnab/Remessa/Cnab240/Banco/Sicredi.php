@@ -237,11 +237,16 @@ class Sicredi extends AbstractRemessa implements RemessaContract
         $this->add(118, 122, Util::formatCnab(9, Util::onlyNumbers($pagamento->getFavorecido()->getCep()), 5)); // CEP do pagador/Sacado
         $this->add(123, 125, Util::formatCnab(9, Util::onlyNumbers(substr($pagamento->getFavorecido()->getCep(), 6, 9)), 3)); //SUFIXO do cep do pagador/Sacado
         $this->add(126, 127, Util::formatCnab('X', $pagamento->getFavorecido()->getUf(), 2)); // Uf do sacado
-        $this->add(128, 210, Util::formatCnab(9, 0, 73)); // Tipo de inscrição do sacado
+        $this->add(128, 135, Util::formatCnab(9, 0, 8)); // Data do vencimento (nominal)
+        $this->add(136, 150, Util::formatCnab(9, 0, 15)); // Valor do documento (nominal)
+        $this->add(151, 165, Util::formatCnab(9, 0, 15)); // Valor do abatimento
+        $this->add(166, 180, Util::formatCnab(9, 0, 15)); // Valor do desconto
+        $this->add(181, 195, Util::formatCnab(9, 0, 15)); // Valor da mora
+        $this->add(196, 210, Util::formatCnab(9, 0, 15)); // Valor da multa
         $this->add(211, 225, Util::formatCnab(9, Util::onlyNumbers($pagamento->getFavorecido()->getDocumento()), 15)); // Tipo de inscrição do sacado
         $this->add(226, 226, Util::formatCnab(9, 0, 1)); // Identificador de carne 000 - Não possui, 001 - Possui Carné
         $this->add(227, 232, Util::formatCnab(9, 0, 6)); // Sequencial da parcela
-        $this->add(233, 240, Util::formatCnab(9, self::ISPB[$pagamento->getBanco()], 8)); // Reservado (Uso Banco)
+        $this->add(233, 240, Util::formatCnab(9, 0, 8)); // Reservado (Uso Banco)
     }
 
     /**
