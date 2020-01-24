@@ -2,6 +2,10 @@
 
 namespace Murilo\Pagamento\Contracts\Cnab\Retorno;
 
+/**
+ * Interface Detalhe
+ * @package Murilo\Pagamento\Contracts\Cnab\Retorno
+ */
 interface Detalhe
 {
     const OCORRENCIA_LIQUIDADA = 1;

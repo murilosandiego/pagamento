@@ -2,6 +2,8 @@
 
 namespace Murilo\Pagamento\Contracts\Cnab;
 
+use Murilo\Pagamento\Support\Collection;
+
 interface RetornoCnab240 extends Cnab
 {
     /**
@@ -20,27 +22,27 @@ interface RetornoCnab240 extends Cnab
     public function getDetalhes();
 
     /**
-     * @return Retorno\Detalhe
+     * @return Retorno\Cnab240\Detalhe
      */
     public function getDetalhe($i);
 
     /**
-     * @return Retorno\Header
+     * @return Retorno\Cnab240\Header
      */
     public function getHeader();
 
     /**
-     * @return Retorno\HeaderLote
+     * @return Retorno\Cnab240\HeaderLote
      */
     public function getHeaderLote();
 
     /**
-     * @return Retorno\TrailerLote
+     * @return Retorno\Cnab240\TrailerLote
      */
     public function getTrailerLote();
 
     /**
-     * @return Retorno\Trailer
+     * @return Retorno\Cnab240\Trailer
      */
     public function getTrailer();
 

@@ -2,6 +2,8 @@
 
 namespace Murilo\Pagamento\Contracts\Cnab;
 
+use Murilo\Pagamento\Support\Collection;
+
 interface RetornoCnab400 extends Cnab
 {
     /**
