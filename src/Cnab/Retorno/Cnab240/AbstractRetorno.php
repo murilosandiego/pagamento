@@ -6,6 +6,7 @@ use Exception;
 use Murilo\Pagamento\Cnab\Retorno\AbstractRetorno as AbstractRetornoGeneric;
 use Murilo\Pagamento\Contracts\Cnab\Retorno\Cnab240\HeaderLote as HeaderLoteContract;
 use Murilo\Pagamento\Contracts\Cnab\Retorno\Cnab240\TrailerLote as TrailerLoteContract;
+use Murilo\Pagamento\Support\Collection;
 
 /**
  * Class AbstractRetorno
@@ -127,7 +128,8 @@ abstract class AbstractRetorno extends AbstractRetornoGeneric
             } elseif ($recordType == '1') {
                 $this->processarHeaderLote($linha);
             } elseif ($recordType == '3') {
-                if ($this->getSegmentType($linha) == 'T') {
+                if ($this->getSegmentType($linha) == 'T'
+                    || ($this->getSegmentType($linha) == 'A' && $this->getHeader()->getCodigoRemessaRetorno() == 2)) {
                     $this->incrementDetalhe();
                 }
 

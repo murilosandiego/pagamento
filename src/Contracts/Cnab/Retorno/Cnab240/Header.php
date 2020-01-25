@@ -36,7 +36,7 @@ interface Header
     /**
      * @return string
      */
-    public function getHoraGeracao();
+    public function getDocumentoEmpresa();
 
     /**
      * @return string

@@ -27,6 +27,11 @@ interface HeaderLote
     /**
      * @return mixed
      */
+    public function getCodBanco();
+
+    /**
+     * @return mixed
+     */
     public function getTipoInscricao();
 
     /**
@@ -37,7 +42,7 @@ interface HeaderLote
     /**
      * @return mixed
      */
-    public function getCodigoCedente();
+    public function getNumeroLoteRetorno();
 
     /**
      * @return mixed
@@ -65,28 +70,9 @@ interface HeaderLote
     public function getConta();
 
     /**
-     * @return string
-     */
-    public function getNumeroRetorno();
-
-    /**
      * @return mixed
      */
     public function getContaDv();
-
-    /**
-     * @param string $format
-     *
-     * @return string
-     */
-    public function getDataGravacao($format = 'd/m/Y');
-
-    /**
-     * @param string $format
-     *
-     * @return string
-     */
-    public function getDataCredito($format = 'd/m/Y');
 
     /**
      * @return array

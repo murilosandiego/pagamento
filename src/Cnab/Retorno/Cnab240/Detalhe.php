@@ -78,11 +78,6 @@ class Detalhe implements DetalheContract
     /**
      * @var string
      */
-    protected $valorTarifa;
-
-    /**
-     * @var string
-     */
     protected $valorIOF;
 
     /**
@@ -109,6 +104,11 @@ class Detalhe implements DetalheContract
      * @var PessoaContract
      */
     protected $pagador;
+
+    /**
+     * @var PessoaContract
+     */
+    protected $favorecido;
 
     /**
      * @var array
@@ -203,26 +203,6 @@ class Detalhe implements DetalheContract
     }
 
     /**
-     * @return int
-     */
-    public function getNumeroControle()
-    {
-        return $this->numeroControle;
-    }
-
-    /**
-     * @param int $numeroControle
-     *
-     * @return $this
-     */
-    public function setNumeroControle($numeroControle)
-    {
-        $this->numeroControle = $numeroControle;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getNumeroDocumento()
@@ -258,26 +238,6 @@ class Detalhe implements DetalheContract
     public function setNossoNumero($nossoNumero)
     {
         $this->nossoNumero = $nossoNumero;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCarteira()
-    {
-        return $this->carteira;
-    }
-
-    /**
-     * @param string $carteira
-     *
-     * @return $this
-     */
-    public function setCarteira($carteira)
-    {
-        $this->carteira = $carteira;
 
         return $this;
     }
@@ -501,26 +461,6 @@ class Detalhe implements DetalheContract
     }
 
     /**
-     * @return string
-     */
-    public function getValorTarifa()
-    {
-        return $this->valorTarifa;
-    }
-
-    /**
-     * @param string $valorTarifa
-     *
-     * @return $this
-     */
-    public function setValorTarifa($valorTarifa)
-    {
-        $this->valorTarifa = $valorTarifa;
-
-        return $this;
-    }
-
-    /**
      * @return PessoaContract
      */
     public function getPagador()
@@ -541,6 +481,26 @@ class Detalhe implements DetalheContract
     }
 
     /**
+     * @return PessoaContract
+     */
+    public function getFavorecido()
+    {
+        return $this->favorecido;
+    }
+
+    /**
+     * @param $favorecido
+     *
+     * @return $this
+     * @throws \Exception
+     */
+    public function setFavorecido($favorecido)
+    {
+        Util::addPessoa($this->favorecido, $favorecido);
+        return $this;
+    }
+
+    /**
      * Retorna se tem erro.
      *
      * @return bool
@@ -548,26 +508,6 @@ class Detalhe implements DetalheContract
     public function hasError()
     {
         return $this->getOcorrencia() == self::OCORRENCIA_ERRO;
-    }
-
-    /**
-     * @return array
-     */
-    public function getCheques()
-    {
-        return $this->cheques;
-    }
-
-    /**
-     * @param array $cheques
-     *
-     * @return Detalhe
-     */
-    public function setCheques(array $cheques)
-    {
-        $this->cheques = $cheques;
-
-        return $this;
     }
 
     /**

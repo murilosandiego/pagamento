@@ -28,49 +28,9 @@ class TrailerLote implements TrailerLoteContract
     protected $qtdRegistroLote;
 
     /**
-     * @var integer
-     */
-    protected $qtdTitulosCobrancaSimples;
-
-    /**
      * @var float
      */
-    protected $valorTotalTitulosCobranca;
-
-    /**
-     * @var integer
-     */
-    protected $qtdTitulosCobrancaVinculada;
-
-    /**
-     * @var float
-     */
-    protected $valorTotalTitulosCobrancaVinculada;
-
-    /**
-     * @var integer
-     */
-    protected $qtdTitulosCobrancaCaucionada;
-
-    /**
-     * @var float
-     */
-    protected $valorTotalTitulosCobrancaCaucionada;
-
-    /**
-     * @var integer
-     */
-    protected $qtdTitulosCobrancaDescontada;
-
-    /**
-     * @var float
-     */
-    protected $valorTotalTitulosCobrancaDescontada;
-
-    /**
-     * @var integer
-     */
-    protected $numeroAvisoLancamento;
+    protected $valorTotalTitulos;
 
     /**
      * @return mixed
@@ -95,26 +55,6 @@ class TrailerLote implements TrailerLoteContract
     /**
      * @return mixed
      */
-    public function getNumeroAvisoLancamento()
-    {
-        return $this->numeroAvisoLancamento;
-    }
-
-    /**
-     * @param mixed $numeroAvisoLancamento
-     *
-     * @return $this
-     */
-    public function setNumeroAvisoLancamento($numeroAvisoLancamento)
-    {
-        $this->numeroAvisoLancamento = $numeroAvisoLancamento;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getQtdRegistroLote()
     {
         return $this->qtdRegistroLote;
@@ -132,85 +72,6 @@ class TrailerLote implements TrailerLoteContract
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getQtdTitulosCobrancaCaucionada()
-    {
-        return $this->qtdTitulosCobrancaCaucionada;
-    }
-
-    /**
-     * @param mixed $qtdTitulosCobrancaCaucionada
-     *
-     * @return $this
-     */
-    public function setQtdTitulosCobrancaCaucionada($qtdTitulosCobrancaCaucionada)
-    {
-        $this->qtdTitulosCobrancaCaucionada = $qtdTitulosCobrancaCaucionada;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQtdTitulosCobrancaDescontada()
-    {
-        return $this->qtdTitulosCobrancaDescontada;
-    }
-
-    /**
-     * @param mixed $qtdTitulosCobrancaDescontada
-     *
-     * @return $this
-     */
-    public function setQtdTitulosCobrancaDescontada($qtdTitulosCobrancaDescontada)
-    {
-        $this->qtdTitulosCobrancaDescontada = $qtdTitulosCobrancaDescontada;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQtdTitulosCobrancaSimples()
-    {
-        return $this->qtdTitulosCobrancaSimples;
-    }
-
-    /**
-     * @param mixed $qtdTitulosCobrancaSimples
-     *
-     * @return $this
-     */
-    public function setQtdTitulosCobrancaSimples($qtdTitulosCobrancaSimples)
-    {
-        $this->qtdTitulosCobrancaSimples = $qtdTitulosCobrancaSimples;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQtdTitulosCobrancaVinculada()
-    {
-        return $this->qtdTitulosCobrancaVinculada;
-    }
-
-    /**
-     * @param mixed $qtdTitulosCobrancaVinculada
-     *
-     * @return $this
-     */
-    public function setQtdTitulosCobrancaVinculada($qtdTitulosCobrancaVinculada)
-    {
-        $this->qtdTitulosCobrancaVinculada = $qtdTitulosCobrancaVinculada;
-
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -235,79 +96,19 @@ class TrailerLote implements TrailerLoteContract
     /**
      * @return mixed
      */
-    public function getValorTotalTitulosCobrancaSimples()
+    public function getValorTotalTitulos()
     {
-        return $this->valorTotalTitulosCobranca;
+        return $this->valorTotalTitulos;
     }
 
     /**
-     * @param mixed $valorTotalTitulosCobranca
+     * @param mixed $valorTotalTitulos
      *
      * @return $this
      */
-    public function setValorTotalTitulosCobrancaSimples($valorTotalTitulosCobranca)
+    public function setValorTotalTitulos($valorTotalTitulos)
     {
-        $this->valorTotalTitulosCobranca = $valorTotalTitulosCobranca;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getValorTotalTitulosCobrancaCaucionada()
-    {
-        return $this->valorTotalTitulosCobrancaCaucionada;
-    }
-
-    /**
-     * @param mixed $valorTotalTitulosCobrancaCaucionada
-     *
-     * @return $this
-     */
-    public function setValorTotalTitulosCobrancaCaucionada($valorTotalTitulosCobrancaCaucionada)
-    {
-        $this->valorTotalTitulosCobrancaCaucionada = $valorTotalTitulosCobrancaCaucionada;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getValorTotalTitulosCobrancaDescontada()
-    {
-        return $this->valorTotalTitulosCobrancaDescontada;
-    }
-
-    /**
-     * @param mixed $valorTotalTitulosCobrancaDescontada
-     *
-     * @return $this
-     */
-    public function setValorTotalTitulosCobrancaDescontada($valorTotalTitulosCobrancaDescontada)
-    {
-        $this->valorTotalTitulosCobrancaDescontada = $valorTotalTitulosCobrancaDescontada;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getValorTotalTitulosCobrancaVinculada()
-    {
-        return $this->valorTotalTitulosCobrancaVinculada;
-    }
-
-    /**
-     * @param mixed $valorTotalTitulosCobrancaVinculada
-     *
-     * @return $this
-     */
-    public function setValorTotalTitulosCobrancaVinculada($valorTotalTitulosCobrancaVinculada)
-    {
-        $this->valorTotalTitulosCobrancaVinculada = $valorTotalTitulosCobrancaVinculada;
+        $this->valorTotalTitulos = $valorTotalTitulos;
 
         return $this;
     }

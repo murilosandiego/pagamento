@@ -14,7 +14,7 @@ class Factory
     /**
      * @param $file
      *
-     * @return Cnab240\AbstractRetorno|Cnab400\AbstractRetorno
+     * @return Cnab240\AbstractRetorno
      * @throws Exception
      */
     public static function make($file)
@@ -33,20 +33,17 @@ class Factory
 
     /**
      * @param $file_content
-     * @return Cnab240\AbstractRetorno|Cnab400\AbstractRetorno
+     * @return Cnab240\AbstractRetorno
      * @throws Exception
      */
     private static function getBancoClass($file_content)
     {
-        $banco = '';
-        $namespace = '';
         if (Util::isCnab400($file_content)) {
-            $banco = substr($file_content[0], 76, 3);
-            $namespace = __NAMESPACE__ . '\\Cnab400\\';
-        } elseif (Util::isCnab240($file_content)) {
-            $banco = substr($file_content[0], 0, 3);
-            $namespace = __NAMESPACE__ . '\\Cnab240\\';
+            throw new Exception('CNAB400 sem suporte');
         }
+
+        $banco = substr($file_content[0], 0, 3);
+        $namespace = __NAMESPACE__ . '\\Cnab240\\';
 
         $aBancos = [
             BoletoContract::COD_BANCO_BB => 'Banco\\Bb',

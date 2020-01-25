@@ -13,6 +13,7 @@ use Murilo\Pagamento\Traits\MagicTrait;
 class Header implements HeaderContract
 {
     use MagicTrait;
+
     /**
      * @var integer
      */
@@ -65,6 +66,11 @@ class Header implements HeaderContract
     /**
      * @var string
      */
+    protected $documentoEmpresa;
+
+    /**
+     * @var string
+     */
     protected $numeroSequencialArquivo;
 
     /**
@@ -91,11 +97,6 @@ class Header implements HeaderContract
      * @var string
      */
     protected $codigoCedente;
-
-    /**
-     * @var string
-     */
-    protected $horaGeracao;
 
     /**
      * @var string
@@ -225,19 +226,19 @@ class Header implements HeaderContract
     /**
      * @return string
      */
-    public function getHoraGeracao()
+    public function getDocumentoEmpresa()
     {
-        return $this->horaGeracao;
+        return $this->documentoEmpresa;
     }
 
     /**
-     * @param string $horaGeracao
+     * @param string $documentoEmpresa
      *
      * @return $this
      */
-    public function setHoraGeracao($horaGeracao)
+    public function setDocumentoEmpresa($documentoEmpresa)
     {
-        $this->horaGeracao = $horaGeracao;
+        $this->documentoEmpresa = $documentoEmpresa;
 
         return $this;
     }
