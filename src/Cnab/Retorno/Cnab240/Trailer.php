@@ -51,7 +51,7 @@ class Trailer implements TrailerContract
     /**
      * @return mixed
      */
-    public function getNumeroLoteRemessa()
+    public function getNumeroLote()
     {
         return $this->numeroLote;
     }

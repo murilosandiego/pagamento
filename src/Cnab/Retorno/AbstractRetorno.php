@@ -5,9 +5,6 @@ use Exception;
 use Murilo\Pagamento\Contracts\Cnab\Retorno\Cnab240\Detalhe as Detalhe240Contract;
 use Murilo\Pagamento\Contracts\Cnab\Retorno\Cnab240\Header as Header240Contract;
 use Murilo\Pagamento\Contracts\Cnab\Retorno\Cnab240\Trailer as Trailer240Contract;
-use Murilo\Pagamento\Contracts\Cnab\Retorno\Cnab400\Detalhe as Detalhe400Contract;
-use Murilo\Pagamento\Contracts\Cnab\Retorno\Cnab400\Trailer as Trailer400Contract;
-use Murilo\Pagamento\Contracts\Cnab\Retorno\Cnab400\Header as Header400Contract;
 use Murilo\Pagamento\Support\Collection;
 use Murilo\Pagamento\Util;
 use OutOfBoundsException;
@@ -47,17 +44,17 @@ abstract class AbstractRetorno implements \Countable, \SeekableIterator
     protected $file;
 
     /**
-     * @var Header240Contract|Header400Contract
+     * @var Header240Contract
      */
     protected $header;
 
     /**
-     * @var Trailer240Contract|Trailer400Contract
+     * @var Trailer240Contract
      */
     protected $trailer;
 
     /**
-     * @var Detalhe240Contract[]|Detalhe400Contract[]
+     * @var Detalhe240Contract[]
      */
     protected $detalhe = [];
 
@@ -134,7 +131,7 @@ abstract class AbstractRetorno implements \Countable, \SeekableIterator
     /**
      * @param $i
      *
-     * @return Detalhe240Contract[]|Detalhe400Contract[]
+     * @return Detalhe240Contract[]
      */
     public function getDetalhe($i)
     {
@@ -142,7 +139,7 @@ abstract class AbstractRetorno implements \Countable, \SeekableIterator
     }
 
     /**
-     * @return Header240Contract|Header400Contract
+     * @return Header240Contract
      */
     public function getHeader()
     {
@@ -150,7 +147,7 @@ abstract class AbstractRetorno implements \Countable, \SeekableIterator
     }
 
     /**
-     * @return Trailer240Contract|Trailer400Contract
+     * @return Trailer240Contract
      */
     public function getTrailer()
     {
@@ -160,7 +157,7 @@ abstract class AbstractRetorno implements \Countable, \SeekableIterator
     /**
      * Retorna o detalhe atual.
      *
-     * @return Detalhe240Contract|Detalhe400Contract
+     * @return Detalhe240Contract
      */
     protected function detalheAtual()
     {
@@ -224,7 +221,7 @@ abstract class AbstractRetorno implements \Countable, \SeekableIterator
 
 
     /**
-     * @return mixed|Detalhe240Contract|Detalhe400Contract
+     * @return mixed|Detalhe240Contract
      */
     public function current()
     {

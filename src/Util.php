@@ -3,6 +3,7 @@
 namespace Murilo\Pagamento;
 
 use Carbon\Carbon;
+use Exception;
 
 /**
  * Class Util
@@ -450,7 +451,7 @@ final class Util
      * @param int $dec
      * @param string $sFill
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public static function formatCnab($tipo, $valor, $tamanho, $dec = 0, $sFill = '')
     {
@@ -469,7 +470,7 @@ final class Util
             $type = 's';
             $valor = self::upper(self::normalizeChars($valor));
         } else {
-            throw new \Exception('Tipo inválido');
+            throw new Exception('Tipo inválido');
         }
         return sprintf("%{$left}{$sFill}{$tamanho}{$type}", mb_substr($valor, 0, $tamanho));
     }
@@ -559,12 +560,12 @@ final class Util
     /**
      * @param array $a
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public static function array2Controle(array $a)
     {
         if (preg_match('/[0-9]/', implode('', array_keys($a)))) {
-            throw new \Exception('Somente chave alfanumérica no array, para separar o controle pela chave');
+            throw new Exception('Somente chave alfanumérica no array, para separar o controle pela chave');
         }
 
         $controle = '';
@@ -573,7 +574,7 @@ final class Util
         }
 
         if (mb_strlen($controle) > 25) {
-            throw new \Exception('Controle muito grande, máximo permitido de 25 caracteres');
+            throw new Exception('Controle muito grande, máximo permitido de 25 caracteres');
         }
 
         return $controle;
@@ -603,7 +604,7 @@ final class Util
      * @param $file
      * @param string $ocorrencia
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public static function criarRetornoFake($file, $ocorrencia = '02')
     {
@@ -652,7 +653,7 @@ final class Util
                 self::adiciona($retorno[0], 47, 76, self::remove(47, 76, $remessa[0]));
                 break;
             default:
-                throw new \Exception("Banco: $banco, inválido");
+                throw new Exception("Banco: $banco, inválido");
         }
         self::adiciona($retorno[0], 77, 79, $banco);
         self::adiciona($retorno[0], 95, 100, date('dmy'));
@@ -709,7 +710,7 @@ final class Util
                     self::adiciona($retorno[$i], 18, 30, self::remove(18, 30, $detalhe));
                     break;
                 default:
-                    throw new \Exception("Banco: $banco, inválido");
+                    throw new Exception("Banco: $banco, inválido");
             }
         }
 
@@ -734,7 +735,7 @@ final class Util
      * @param $f
      * @param $array
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public static function remove($i, $f, &$array)
     {
@@ -744,11 +745,11 @@ final class Util
         $i--;
 
         if ($i > 398 || $f > 400) {
-            throw new \Exception('$ini ou $fim ultrapassam o limite máximo de 400');
+            throw new Exception('$ini ou $fim ultrapassam o limite máximo de 400');
         }
 
         if ($f < $i) {
-            throw new \Exception('$ini é maior que o $fim');
+            throw new Exception('$ini é maior que o $fim');
         }
 
         $t = $f - $i;
@@ -764,24 +765,24 @@ final class Util
      * @param $f
      * @param $value
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public static function adiciona(&$line, $i, $f, $value)
     {
         $i--;
 
         if ($i > 398 || $f > 400) {
-            throw new \Exception('$ini ou $fim ultrapassam o limite máximo de 400');
+            throw new Exception('$ini ou $fim ultrapassam o limite máximo de 400');
         }
 
         if ($f < $i) {
-            throw new \Exception('$ini é maior que o $fim');
+            throw new Exception('$ini é maior que o $fim');
         }
 
         $t = $f - $i;
 
         if (mb_strlen($value) > $t) {
-            throw new \Exception(sprintf('String $valor maior que o tamanho definido em $ini e $fim: $valor=%s e tamanho é de: %s', mb_strlen($value), $t));
+            throw new Exception(sprintf('String $valor maior que o tamanho definido em $ini e $fim: $valor=%s e tamanho é de: %s', mb_strlen($value), $t));
         }
 
         $value = sprintf("%{$t}s", $value);
@@ -876,7 +877,7 @@ final class Util
      * @param $property
      * @param $obj
      * @return Pessoa
-     * @throws \Exception
+     * @throws Exception
      */
     public static function addPessoa(&$property, $obj)
     {
@@ -888,6 +889,6 @@ final class Util
             $property = $obj;
             return $obj;
         }
-        throw new \Exception('Objeto inválido, somente Pessoa e Array');
+        throw new Exception('Objeto inválido, somente Pessoa e Array');
     }
 }

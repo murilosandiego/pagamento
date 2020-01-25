@@ -58,25 +58,11 @@ class HeaderLote implements HeaderLoteContract
      */
     protected $agenciaDv;
 
-    /**
-     * @var string
-     */
-    protected $codigoCedente;
 
     /**
      * @var string
      */
     protected $nomeEmpresa;
-
-    /**
-     * @var string
-     */
-    protected $numeroRetorno;
-
-    /**
-     * @var Carbon
-     */
-    protected $dataGravacao;
 
     /**
      * @var string
@@ -96,42 +82,7 @@ class HeaderLote implements HeaderLoteContract
     /**
      * @var string
      */
-    protected $codigoBanco;
-
-    /**
-     * @var string
-     */
-    protected $mensagem_1;
-
-    /**
-     * @var Carbon
-     */
-    protected $dataCredito;
-
-    /**
-     * @var string
-     */
     protected $convenio;
-
-    /**
-     * @return string
-     */
-    public function getCodigoBanco()
-    {
-        return $this->codigoBanco;
-    }
-
-    /**
-     * @param string $codigoBanco
-     *
-     * @return $this
-     */
-    public function setCodigoBanco($codigoBanco)
-    {
-        $this->codigoBanco = $codigoBanco;
-
-        return $this;
-    }
 
     /**
      * @return string
@@ -297,26 +248,6 @@ class HeaderLote implements HeaderLoteContract
     /**
      * @return string
      */
-    public function getCodigoCedente()
-    {
-        return $this->codigoCedente;
-    }
-
-    /**
-     * @param string $codigoCedente
-     *
-     * @return $this
-     */
-    public function setCodigoCedente($codigoCedente)
-    {
-        $this->codigoCedente = $codigoCedente;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
     public function getConvenio()
     {
         return $this->convenio;
@@ -350,66 +281,6 @@ class HeaderLote implements HeaderLoteContract
     public function setNomeEmpresa($nomeEmpresa)
     {
         $this->nomeEmpresa = $nomeEmpresa;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMensagem1()
-    {
-        return $this->mensagem_1;
-    }
-
-    /**
-     * @param string $format
-     *
-     * @return string
-     */
-    public function getDataGravacao($format = 'd/m/Y')
-    {
-        return $this->dataGravacao instanceof Carbon
-            ? $format === false ? $this->dataGravacao : $this->dataGravacao->format($format)
-            : null;
-    }
-
-    /**
-     * @param string $dataGravacao
-     *
-     * @param string $format
-     *
-     * @return $this
-     */
-    public function setDataGravacao($dataGravacao, $format = 'dmY')
-    {
-        $this->dataGravacao = trim($dataGravacao, '0 ') ? Carbon::createFromFormat($format, $dataGravacao) : null;
-
-        return $this;
-    }
-
-    /**
-     * @param string $format
-     *
-     * @return string
-     */
-    public function getDataCredito($format = 'd/m/Y')
-    {
-        return $this->dataCredito instanceof Carbon
-            ? $format === false ? $this->dataCredito : $this->dataCredito->format($format)
-            : null;
-    }
-
-    /**
-     * @param string $dataCredito
-     *
-     * @param string $format
-     *
-     * @return $this
-     */
-    public function setDataCredito($dataCredito, $format = 'dmY')
-    {
-        $this->dataCredito = trim($dataCredito, '0 ') ? Carbon::createFromFormat($format, $dataCredito) : null;
 
         return $this;
     }
@@ -470,26 +341,6 @@ class HeaderLote implements HeaderLoteContract
     public function setConta($conta)
     {
         $this->conta = $conta;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNumeroRetorno()
-    {
-        return $this->numeroRetorno;
-    }
-
-    /**
-     * @param string $numeroRetorno
-     *
-     * @return $this
-     */
-    public function setNumeroRetorno($numeroRetorno)
-    {
-        $this->numeroRetorno = $numeroRetorno;
 
         return $this;
     }
