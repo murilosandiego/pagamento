@@ -5,6 +5,10 @@ namespace Murilo\Pagamento\Contracts\Pagamento;
 use Carbon\Carbon;
 use Murilo\Pagamento\Contracts\Pessoa as PessoaContract;
 
+/**
+ * Interface Pagamento
+ * @package Murilo\Pagamento\Contracts\Pagamento
+ */
 interface Pagamento
 {
     const COD_BANCO_BB = '001';
@@ -22,20 +26,44 @@ interface Pagamento
     const TIPO_MOVIMENTO_ALTERACAO = 5;
     const TIPO_MOVIMENTO_EXCLUSAO = 3;
 
+    /**
+     * @return mixed
+     */
     public function getBanco();
 
+    /**
+     * @return mixed
+     */
     public function getAgencia();
 
+    /**
+     * @return mixed
+     */
     public function getAgenciaDv();
 
+    /**
+     * @return mixed
+     */
     public function getTipoMovimento();
 
+    /**
+     * @return mixed
+     */
     public function getInstrucaoMovimento();
 
+    /**
+     * @return mixed
+     */
     public function getTipoMoeda();
 
+    /**
+     * @return mixed
+     */
     public function getFinalidade();
 
+    /**
+     * @return mixed
+     */
     public function getFinalidadesTED();
 
     /**
@@ -43,10 +71,19 @@ interface Pagamento
      */
     public function getFavorecido();
 
+    /**
+     * @return mixed
+     */
     public function getConta();
 
+    /**
+     * @return mixed
+     */
     public function getContaDv();
 
+    /**
+     * @return mixed
+     */
     public function getNumeroDocumento();
 
     /**
@@ -54,6 +91,9 @@ interface Pagamento
      */
     public function getData();
 
+    /**
+     * @return mixed
+     */
     public function getValor();
 
 }

@@ -2,8 +2,10 @@
 namespace Murilo\Pagamento\Cnab\Retorno\Cnab240;
 
 use Carbon\Carbon;
+use Exception;
 use Murilo\Pagamento\Contracts\Cnab\Retorno\Cnab240\Detalhe as DetalheContract;
 use Murilo\Pagamento\Contracts\Pessoa as PessoaContract;
+use Murilo\Pagamento\Contracts\Conta as ContaContract;
 use Murilo\Pagamento\Traits\MagicTrait;
 use Murilo\Pagamento\Util;
 
@@ -109,6 +111,16 @@ class Detalhe implements DetalheContract
      * @var PessoaContract
      */
     protected $favorecido;
+
+    /**
+     * @var ContaContract
+     */
+    protected $contaFavorecido;
+
+    /**
+     * @var ContaContract
+     */
+    protected $contaPagador;
 
     /**
      * @var array
@@ -472,7 +484,7 @@ class Detalhe implements DetalheContract
      * @param $pagador
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function setPagador($pagador)
     {
@@ -492,11 +504,51 @@ class Detalhe implements DetalheContract
      * @param $favorecido
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function setFavorecido($favorecido)
     {
         Util::addPessoa($this->favorecido, $favorecido);
+        return $this;
+    }
+
+    /**
+     * @return ContaContract
+     */
+    public function getContaPagador()
+    {
+        return $this->contaPagador;
+    }
+
+    /**
+     * @param $contaPagador
+     *
+     * @return $this
+     * @throws Exception
+     */
+    public function setContaPagador($contaPagador)
+    {
+        Util::addConta($this->contaPagador, $contaPagador);
+        return $this;
+    }
+
+    /**
+     * @return ContaContract
+     */
+    public function getContaFavorecido()
+    {
+        return $this->contaFavorecido;
+    }
+
+    /**
+     * @param $contaFavorecido
+     *
+     * @return $this
+     * @throws Exception
+     */
+    public function setContaFavorecido($contaFavorecido)
+    {
+        Util::addConta($this->contaFavorecido, $contaFavorecido);
         return $this;
     }
 

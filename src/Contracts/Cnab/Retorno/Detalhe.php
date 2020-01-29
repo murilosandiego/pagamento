@@ -3,6 +3,7 @@
 namespace Murilo\Pagamento\Contracts\Cnab\Retorno;
 
 use Murilo\Pagamento\Contracts\Pessoa as PessoaContract;
+use Murilo\Pagamento\Contracts\Conta as ContaContract;
 
 /**
  * Interface Detalhe
@@ -108,6 +109,16 @@ interface Detalhe
      * @return mixed
      */
     public function getValorMulta();
+
+    /**
+     * @return ContaContract
+     */
+    public function getContaFavorecido();
+
+    /**
+     * @return ContaContract
+     */
+    public function getContaPagador();
 
     /**
      * @return string

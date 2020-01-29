@@ -310,9 +310,9 @@ final class Util
     /**
      * Mostra o Valor no float Formatado
      *
-     * @param  string $number
-     * @param  integer $decimals
-     * @param  boolean $showThousands
+     * @param string $number
+     * @param integer $decimals
+     * @param boolean $showThousands
      * @return string
      */
     public static function nFloat($number, $decimals = 2, $showThousands = false)
@@ -338,10 +338,10 @@ final class Util
     /**
      * Mostra o Valor no real Formatado
      *
-     * @param  float $number
-     * @param  boolean $fixed
-     * @param  boolean $symbol
-     * @param  integer $decimals
+     * @param float $number
+     * @param boolean $fixed
+     * @param boolean $symbol
+     * @param integer $decimals
      * @return string
      */
     public static function nReal($number, $decimals = 2, $symbol = true, $fixed = true)
@@ -886,6 +886,25 @@ final class Util
             return $obj;
         } elseif (is_array($obj)) {
             $obj = new Pessoa($obj);
+            $property = $obj;
+            return $obj;
+        }
+        throw new Exception('Objeto inválido, somente Pessoa e Array');
+    }
+
+    /**
+     * @param $property
+     * @param $obj
+     * @return Conta
+     * @throws Exception
+     */
+    public static function addConta(&$property, $obj)
+    {
+        if (is_subclass_of($obj, 'Murilo\\Pagamento\\Contracts\\Conta')) {
+            $property = $obj;
+            return $obj;
+        } elseif (is_array($obj)) {
+            $obj = new Conta($obj);
             $property = $obj;
             return $obj;
         }

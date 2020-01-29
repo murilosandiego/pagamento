@@ -233,6 +233,7 @@ class Sicredi extends AbstractRetorno implements RetornoCnab240
         $d = $this->detalheAtual();
 
         $favorecido = [];
+        $contaFavorecido = [];
 
         if ($this->getSegmentType($detalhe) == 'A') {
             $d->setOcorrencia($this->rem(231, 240, $detalhe))
@@ -243,6 +244,11 @@ class Sicredi extends AbstractRetorno implements RetornoCnab240
                 ->setValor(Util::nFloat($this->rem(120, 134, $detalhe)/100, 2, false));
 
             $favorecido['nome'] = $this->rem(44, 73, $detalhe);
+            $contaFavorecido['banco'] = $this->rem(21, 23, $detalhe);
+            $contaFavorecido['agencia'] = $this->rem(24, 28, $detalhe);
+            $contaFavorecido['agenciaDv'] = $this->rem(29, 29, $detalhe);
+            $contaFavorecido['conta'] = $this->rem(30, 41, $detalhe);
+            $contaFavorecido['contaDv'] = $this->rem(42, 42, $detalhe);
 
             /**
              * ocorrencias
@@ -287,11 +293,24 @@ class Sicredi extends AbstractRetorno implements RetornoCnab240
             $favorecido['documento'] = $documento;
         }
 
-        $d->setFavorecido($favorecido);
-        $d->setPagador([
-            'nome' => $this->getHeader()->getNomeEmpresa(),
-            'documento' => $this->getHeader()->getDocumentoEmpresa(),
-        ]);
+        if ($d->getContaFavorecido() === null && !empty($favorecido)) {
+            $contaFavorecido['pessoa'] = $favorecido;
+            $d->setContaFavorecido($contaFavorecido);
+        }
+
+        if ($d->getContaPagador() === null) {
+            $d->setContaPagador([
+                'banco' => $this->getHeader()->getCodBanco(),
+                'agencia' => $this->getHeader()->getAgencia(),
+                'agenciaDv' => $this->getHeader()->getAgenciaDv(),
+                'conta' => $this->getHeader()->getConta(),
+                'contaDv' => $this->getHeader()->getContaDv(),
+                'pessoa' => [
+                    'nome' => $this->getHeader()->getNomeEmpresa(),
+                    'documento' => $this->getHeader()->getDocumentoEmpresa(),
+                ],
+            ]);
+        }
 
         if ($this->getSegmentType($detalhe) == 'U') {
             $d->setValorDesconto(Util::nFloat($this->rem(33, 47, $detalhe)/100, 2, false))
