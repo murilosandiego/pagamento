@@ -64,7 +64,7 @@ class Conta implements ContaContract
             'agenciaDv' => $agenciaDv,
             'conta' => $conta,
             'contaDv' => $contaDv,
-            'pessoa' => Pessoa::create($pessoa),
+            'pessoa' => $pessoa,
         ]);
     }
 
@@ -75,8 +75,11 @@ class Conta implements ContaContract
      */
     public function __construct($params = [])
     {
+        if (isset($params['pessoa']) && !($params['pessoa'] instanceof Pessoa)) {
+            $params['pessoa'] = new Pessoa($params['pessoa']);
+        }
+
         Util::fillClass($this, $params);
-        $this->setBancoNome(isset(Util::$bancos[$this->banco]) ? Util::$bancos[$this->banco] : null);
     }
 
     /**
@@ -88,11 +91,14 @@ class Conta implements ContaContract
     }
 
     /**
-     * @param string $banco
+     * @param $banco
+     * @return Conta
      */
     public function setBanco($banco)
     {
         $this->banco = $banco;
+        $this->setBancoNome(isset(Util::$bancos[$this->banco]) ? Util::$bancos[$this->banco] : null);
+        return $this;
     }
 
     /**
@@ -104,11 +110,13 @@ class Conta implements ContaContract
     }
 
     /**
-     * @param string $bancoNome
+     * @param $bancoNome
+     * @return Conta
      */
     public function setBancoNome($bancoNome)
     {
         $this->bancoNome = $bancoNome;
+        return $this;
     }
 
     /**
@@ -120,11 +128,13 @@ class Conta implements ContaContract
     }
 
     /**
-     * @param string $agencia
+     * @param $agencia
+     * @return Conta
      */
     public function setAgencia($agencia)
     {
         $this->agencia = $agencia;
+        return $this;
     }
 
     /**
@@ -136,11 +146,13 @@ class Conta implements ContaContract
     }
 
     /**
-     * @param string $agenciaDv
+     * @param $agenciaDv
+     * @return Conta
      */
     public function setAgenciaDv($agenciaDv)
     {
         $this->agenciaDv = $agenciaDv;
+        return $this;
     }
 
     /**
@@ -152,11 +164,13 @@ class Conta implements ContaContract
     }
 
     /**
-     * @param string $conta
+     * @param $conta
+     * @return Conta
      */
     public function setConta($conta)
     {
         $this->conta = $conta;
+        return $this;
     }
 
     /**
@@ -168,11 +182,13 @@ class Conta implements ContaContract
     }
 
     /**
-     * @param string $contaDv
+     * @param $contaDv
+     * @return Conta
      */
     public function setContaDv($contaDv)
     {
         $this->contaDv = $contaDv;
+        return $this;
     }
 
     /**
@@ -184,11 +200,13 @@ class Conta implements ContaContract
     }
 
     /**
-     * @param PessoaContract $pessoa
+     * @param $pessoa
+     * @return Conta
      */
     public function setPessoa($pessoa)
     {
         $this->pessoa = $pessoa;
+        return $this;
     }
 
     /**
