@@ -1,43 +1,55 @@
 <?php
 namespace Murilo\Pagamento;
 
+use Exception;
 use Murilo\Pagamento\Contracts\Pessoa as PessoaContract;
-use Murilo\Pagamento\Util;
 
+/**
+ * Class Pessoa
+ * @package Murilo\Pagamento
+ */
 class Pessoa implements PessoaContract
 {
     /**
      * @var string
      */
     protected $nome;
+
     /**
      * @var string
      */
     protected $endereco;
+
     /**
      * @var string
      */
     protected $numero;
+
     /**
      * @var string
      */
     protected $complemento;
+
     /**
      * @var string
      */
     protected $bairro;
+
     /**
      * @var string
      */
     protected $cep;
+
     /**
      * @var string
      */
     protected $uf;
+
     /**
      * @var string
      */
     protected $cidade;
+
     /**
      * @var string
      */
@@ -77,6 +89,7 @@ class Pessoa implements PessoaContract
     {
         Util::fillClass($this, $params);
     }
+
     /**
      * Define o CEP
      *
@@ -86,6 +99,7 @@ class Pessoa implements PessoaContract
     {
         $this->cep = $cep;
     }
+
     /**
      * Retorna o CEP
      *
@@ -95,6 +109,7 @@ class Pessoa implements PessoaContract
     {
         return Util::maskString(Util::onlyNumbers($this->cep), '#####-###');
     }
+
     /**
      * Define a cidade
      *
@@ -104,6 +119,7 @@ class Pessoa implements PessoaContract
     {
         $this->cidade = $cidade;
     }
+
     /**
      * Retorna a cidade
      *
@@ -119,16 +135,17 @@ class Pessoa implements PessoaContract
      *
      * @param string $documento
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function setDocumento($documento)
     {
         $documento = substr(Util::onlyNumbers($documento), -14);
         if (!in_array(strlen($documento), [10, 11, 14, 0])) {
-            throw new \Exception('Documento inválido');
+            throw new Exception('Documento inválido');
         }
         $this->documento = $documento;
     }
+
     /**
      * Retorna o documento (CPF ou CNPJ)
      *
@@ -143,6 +160,7 @@ class Pessoa implements PessoaContract
         }
         return Util::maskString(Util::onlyNumbers($this->documento), '##.###.###/####-##');
     }
+
     /**
      * Define o endereço
      *
@@ -152,6 +170,7 @@ class Pessoa implements PessoaContract
     {
         $this->endereco = $endereco;
     }
+
     /**
      * Retorna o endereço
      *
@@ -161,6 +180,7 @@ class Pessoa implements PessoaContract
     {
         return $this->endereco;
     }
+
     /**
      * Define o bairro
      *
@@ -170,6 +190,7 @@ class Pessoa implements PessoaContract
     {
         $this->bairro = $bairro;
     }
+
     /**
      * Retorna o bairro
      *
@@ -179,6 +200,7 @@ class Pessoa implements PessoaContract
     {
         return $this->bairro;
     }
+
     /**
      * Define o nome
      *
@@ -188,6 +210,7 @@ class Pessoa implements PessoaContract
     {
         $this->nome = $nome;
     }
+
     /**
      * Retorna o nome
      *
@@ -197,6 +220,7 @@ class Pessoa implements PessoaContract
     {
         return $this->nome;
     }
+
     /**
      * Define a UF
      *
@@ -206,6 +230,7 @@ class Pessoa implements PessoaContract
     {
         $this->uf = $uf;
     }
+
     /**
      * Retorna a UF
      *
@@ -215,6 +240,7 @@ class Pessoa implements PessoaContract
     {
         return $this->uf;
     }
+
     /**
      * Retorna o nome e o documento formatados
      *
@@ -228,6 +254,7 @@ class Pessoa implements PessoaContract
             return $this->getNome() . ' / ' . $this->getTipoDocumento() . ': ' . $this->getDocumento();
         }
     }
+
     /**
      * Retorna se o tipo do documento é CPF ou CNPJ ou Documento
      *
@@ -245,6 +272,7 @@ class Pessoa implements PessoaContract
         
         return 'CNPJ';
     }
+
     /**
      * Retorna o endereço formatado para a linha 2 de endereço
      *
@@ -256,6 +284,22 @@ class Pessoa implements PessoaContract
     {
         $dados = array_filter(array($this->getCep(), $this->getCidade(), $this->getUf()));
         return implode(' - ', $dados);
+    }
+
+    /**
+     * @return string
+     */
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComplemento()
+    {
+        return $this->complemento;
     }
 
     /**
@@ -274,15 +318,5 @@ class Pessoa implements PessoaContract
             'nome_documento' => $this->getNomeDocumento(),
             'endereco2' => $this->getCepCidadeUf(),
         ];
-    }
-
-    public function getNumero()
-    {
-        return $this->numero;
-    }
-
-    public function getComplemento()
-    {
-        return $this->complemento;
     }
 }
