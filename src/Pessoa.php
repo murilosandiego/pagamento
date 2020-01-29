@@ -94,10 +94,12 @@ class Pessoa implements PessoaContract
      * Define o CEP
      *
      * @param string $cep
+     * @return Pessoa
      */
     public function setCep($cep)
     {
         $this->cep = $cep;
+        return $this;
     }
 
     /**
@@ -114,10 +116,12 @@ class Pessoa implements PessoaContract
      * Define a cidade
      *
      * @param string $cidade
+     * @return Pessoa
      */
     public function setCidade($cidade)
     {
         $this->cidade = $cidade;
+        return $this;
     }
 
     /**
@@ -136,14 +140,18 @@ class Pessoa implements PessoaContract
      * @param string $documento
      *
      * @throws Exception
+     * @return Pessoa
      */
     public function setDocumento($documento)
     {
         $documento = substr(Util::onlyNumbers($documento), -14);
+
         if (!in_array(strlen($documento), [10, 11, 14, 0])) {
             throw new Exception('Documento inválido');
         }
+
         $this->documento = $documento;
+        return $this;
     }
 
     /**
@@ -155,7 +163,9 @@ class Pessoa implements PessoaContract
     {
         if ($this->getTipoDocumento() == 'CPF') {
             return Util::maskString(Util::onlyNumbers($this->documento), '###.###.###-##');
-        } elseif ($this->getTipoDocumento() == 'CEI') {
+        }
+
+        if ($this->getTipoDocumento() == 'CEI') {
             return Util::maskString(Util::onlyNumbers($this->documento), '##.#####.#-##');
         }
         return Util::maskString(Util::onlyNumbers($this->documento), '##.###.###/####-##');
@@ -165,10 +175,12 @@ class Pessoa implements PessoaContract
      * Define o endereço
      *
      * @param string $endereco
+     * @return Pessoa
      */
     public function setEndereco($endereco)
     {
         $this->endereco = $endereco;
+        return $this;
     }
 
     /**
@@ -185,10 +197,12 @@ class Pessoa implements PessoaContract
      * Define o bairro
      *
      * @param string $bairro
+     * @return Pessoa
      */
     public function setBairro($bairro)
     {
         $this->bairro = $bairro;
+        return $this;
     }
 
     /**
@@ -205,10 +219,12 @@ class Pessoa implements PessoaContract
      * Define o nome
      *
      * @param string $nome
+     * @return Pessoa
      */
     public function setNome($nome)
     {
         $this->nome = $nome;
+        return $this;
     }
 
     /**
@@ -225,10 +241,12 @@ class Pessoa implements PessoaContract
      * Define a UF
      *
      * @param string $uf
+     * @return Pessoa
      */
     public function setUf($uf)
     {
         $this->uf = $uf;
+        return $this;
     }
 
     /**
@@ -250,9 +268,9 @@ class Pessoa implements PessoaContract
     {
         if (!$this->getDocumento()) {
             return $this->getNome();
-        } else {
-            return $this->getNome() . ' / ' . $this->getTipoDocumento() . ': ' . $this->getDocumento();
         }
+
+        return $this->getNome() . ' / ' . $this->getTipoDocumento() . ': ' . $this->getDocumento();
     }
 
     /**
@@ -266,10 +284,12 @@ class Pessoa implements PessoaContract
 
         if (strlen($cpf_cnpj_cei) == 11) {
             return 'CPF';
-        } elseif (strlen($cpf_cnpj_cei) == 10) {
+        }
+
+        if (strlen($cpf_cnpj_cei) == 10) {
             return 'CEI';
         }
-        
+
         return 'CNPJ';
     }
 

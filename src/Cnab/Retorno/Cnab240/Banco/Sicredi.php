@@ -5,6 +5,7 @@ use Exception;
 use Murilo\Pagamento\Cnab\Retorno\Cnab240\AbstractRetorno;
 use Murilo\Pagamento\Cnab\Retorno\Cnab240\Detalhe;
 use Murilo\Pagamento\Contracts\Boleto\Boleto as BoletoContract;
+use Murilo\Pagamento\Contracts\Conta as ContaContract;
 use Murilo\Pagamento\Contracts\Cnab\RetornoCnab240;
 use Murilo\Pagamento\Util;
 
@@ -232,8 +233,9 @@ class Sicredi extends AbstractRetorno implements RetornoCnab240
         /** @var Detalhe $d */
         $d = $this->detalheAtual();
 
-        $favorecido = [];
-        $contaFavorecido = [];
+        if ($d->getContaFavorecido() === null) {
+            $d->setContaFavorecido(['pessoa' => ['nome' => '', 'documento' => '']]);
+        }
 
         if ($this->getSegmentType($detalhe) == 'A') {
             $d->setOcorrencia($this->rem(231, 240, $detalhe))
@@ -243,12 +245,13 @@ class Sicredi extends AbstractRetorno implements RetornoCnab240
                 ->setDataCredito($this->rem(94, 101, $detalhe))
                 ->setValor(Util::nFloat($this->rem(120, 134, $detalhe)/100, 2, false));
 
-            $favorecido['nome'] = $this->rem(44, 73, $detalhe);
-            $contaFavorecido['banco'] = $this->rem(21, 23, $detalhe);
-            $contaFavorecido['agencia'] = $this->rem(24, 28, $detalhe);
-            $contaFavorecido['agenciaDv'] = $this->rem(29, 29, $detalhe);
-            $contaFavorecido['conta'] = $this->rem(30, 41, $detalhe);
-            $contaFavorecido['contaDv'] = $this->rem(42, 42, $detalhe);
+            $d->getContaFavorecido()->getPessoa()->setNome($this->rem(44, 73, $detalhe));
+            $d->getContaFavorecido()
+                ->setBanco($this->rem(21, 23, $detalhe))
+                ->setAgencia($this->rem(24, 28, $detalhe))
+                ->setAgenciaDv($this->rem(29, 29, $detalhe))
+                ->setConta($this->rem(30, 41, $detalhe))
+                ->setContaDv($this->rem(42, 42, $detalhe));
 
             /**
              * ocorrencias
@@ -290,12 +293,9 @@ class Sicredi extends AbstractRetorno implements RetornoCnab240
                 $documento = substr($documento, 3);
             }
 
-            $favorecido['documento'] = $documento;
-        }
-
-        if ($d->getContaFavorecido() === null && !empty($favorecido)) {
-            $contaFavorecido['pessoa'] = $favorecido;
-            $d->setContaFavorecido($contaFavorecido);
+            if ($d->getContaFavorecido() instanceof ContaContract) {
+                $d->getContaFavorecido()->getPessoa()->setDocumento($documento);
+            }
         }
 
         if ($d->getContaPagador() === null) {
