@@ -2,6 +2,13 @@
 
 namespace Murilo\Pagamento\Contracts\Cnab\Retorno;
 
+use Murilo\Pagamento\Contracts\Pessoa as PessoaContract;
+use Murilo\Pagamento\Contracts\Conta as ContaContract;
+
+/**
+ * Interface Detalhe
+ * @package Murilo\Pagamento\Contracts\Cnab\Retorno
+ */
 interface Detalhe
 {
     const OCORRENCIA_LIQUIDADA = 1;
@@ -11,6 +18,16 @@ interface Detalhe
     const OCORRENCIA_PROTESTADA = 5;
     const OCORRENCIA_OUTROS = 6;
     const OCORRENCIA_ERRO = 9;
+
+    /**
+     * @return PessoaContract
+     */
+    public function getFavorecido();
+
+    /**
+     * @return PessoaContract
+     */
+    public function getPagador();
 
     /**
      * @return mixed
@@ -66,11 +83,6 @@ interface Detalhe
     /**
      * @return mixed
      */
-    public function getValorTarifa();
-
-    /**
-     * @return mixed
-     */
     public function getValorIOF();
 
     /**
@@ -97,6 +109,16 @@ interface Detalhe
      * @return mixed
      */
     public function getValorMulta();
+
+    /**
+     * @return ContaContract
+     */
+    public function getContaFavorecido();
+
+    /**
+     * @return ContaContract
+     */
+    public function getContaPagador();
 
     /**
      * @return string

@@ -4,4 +4,3 @@
 .composer.lock
 /tests/_reports/
 *.lock
-/src/Cnab/Retorno

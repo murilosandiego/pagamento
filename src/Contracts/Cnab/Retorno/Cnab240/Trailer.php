@@ -12,7 +12,7 @@ interface Trailer
     /**
      * @return mixed
      */
-    public function getNumeroLoteRemessa();
+    public function getNumeroLote();
 
     /**
      * @return mixed

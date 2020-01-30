@@ -12,32 +12,7 @@ interface TrailerLote
     /**
      * @return mixed
      */
-    public function getNumeroAvisoLancamento();
-
-    /**
-     * @return mixed
-     */
     public function getQtdRegistroLote();
-
-    /**
-     * @return mixed
-     */
-    public function getQtdTitulosCobrancaCaucionada();
-
-    /**
-     * @return mixed
-     */
-    public function getQtdTitulosCobrancaDescontada();
-
-    /**
-     * @return mixed
-     */
-    public function getQtdTitulosCobrancaSimples();
-
-    /**
-     * @return mixed
-     */
-    public function getQtdTitulosCobrancaVinculada();
 
     /**
      * @return mixed
@@ -47,22 +22,7 @@ interface TrailerLote
     /**
      * @return mixed
      */
-    public function getValorTotalTitulosCobrancaSimples();
-
-    /**
-     * @return mixed
-     */
-    public function getValorTotalTitulosCobrancaCaucionada();
-
-    /**
-     * @return mixed
-     */
-    public function getValorTotalTitulosCobrancaDescontada();
-
-    /**
-     * @return mixed
-     */
-    public function getValorTotalTitulosCobrancaVinculada();
+    public function getValorTotalTitulos();
 
     /**
      * @return array

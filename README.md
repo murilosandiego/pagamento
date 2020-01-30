@@ -22,10 +22,12 @@ Ou adicione manualmente ao seu composer.json:
 "murilosandiego/pagamento": "dev-master"
 ```
 
-## Gerar Pagamento
+## Remessa
+
+### Gerar Pagamento
 
 
-### Criando a empresa ou favorecido
+#### Criando a empresa ou favorecido
 
 ```php
 $empresa = new \Murilo\Pagamento\Pessoa(
@@ -55,7 +57,7 @@ $favorecido = new \Murilo\Pagamento\Pessoa(
 );
 ```
 
-### Criando o pagamento
+#### Criando o pagamento
 
 ```php
 $pagamento = new \Murilo\Pagamento\Pagamento\Banco\Sicredi(
@@ -74,7 +76,7 @@ $pagamento = new \Murilo\Pagamento\Pagamento\Banco\Sicredi(
 ```
 
 
-## Gerar remessa
+### Gerar remessa
 
 ```php
 $remessa = new \Murilo\Pagamento\Cnab\Remessa\Cnab240\Banco\Sicredi(
@@ -106,9 +108,49 @@ echo $remessa->gerar();
 //Salvar remessa
 echo $remessa->save(__DIR__ . DIRECTORY_SEPARATOR . 'arquivos' . DIRECTORY_SEPARATOR . 'sicredi_pagamento.txt');
 ```
+
+## Retorno
+
+### Tratar retorno
+
+```php
+$retorno = \Murilo\Pagamento\Cnab\Retorno\Factory::make('/caminho/para/arquivo.RET');
+$retorno->processar();
+echo $retorno->getBancoNome();
+
+// Retorno implementa \SeekableIterator, sendo assim, podemos utilizar o foreach da seguinte forma:
+foreach($retorno as $registro) {
+	var_dump($registro->toArray());
+}
+
+// Ou também podemos:
+$detalheCollection = $retorno->getDetalhes();
+foreach($detalheCollection as $detalhe) {
+	var_dump($detalhe->toArray());
+}
+
+// Ou até mesmo do jeito laravel
+$detalheCollection->each(function ($detalhe, $index) {
+    var_dump($detalhe->toArray())
+});
+```
+
+**Métodos disponíveis:**
+
+```php
+$retorno->getDetalhes();
+
+$retorno->getHeader();
+
+$retorno->getTrailer();
+```
+
+
 ## Autores
 
 * **Murilo Sandiego** - *Initial work* - [murilosandiego](https://github.com/murilosandiego)
+* **Silas Ribas** - *Commiter* - [silasrm](https://github.com/silasrm)
+
 
 ## Licença
 
