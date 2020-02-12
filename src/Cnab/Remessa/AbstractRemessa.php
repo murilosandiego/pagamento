@@ -2,6 +2,7 @@
 
 namespace Murilo\Pagamento\Cnab\Remessa;
 
+use Exception;
 use Murilo\Pagamento\Contracts\Boleto\Boleto as BoletoContract;
 use Murilo\Pagamento\Contracts\Pessoa as PessoaContract;
 use Murilo\Pagamento\Contracts\Pagamento\Pagamento as PagamentoContract;
@@ -14,7 +15,6 @@ use Murilo\Pagamento\Util;
  */
 abstract class AbstractRemessa
 {
-
     const HEADER = 'header';
     const HEADER_LOTE = 'header_lote';
     const DETALHE = 'detalhe';
@@ -214,7 +214,7 @@ abstract class AbstractRemessa
      * @param $beneficiario
      *
      * @return AbstractRemessa
-     * @throws \Exception
+     * @throws Exception
      */
     public function setBeneficiario($beneficiario)
     {
@@ -297,13 +297,14 @@ abstract class AbstractRemessa
      *
      * @param $carteira
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function setCarteira($carteira)
     {
         if (!in_array($carteira, $this->getCarteiras())) {
-            throw new \Exception("Carteira não disponível!");
+            throw new Exception("Carteira não disponível!");
         }
+
         $this->carteira = $carteira;
 
         return $this;
@@ -373,7 +374,7 @@ abstract class AbstractRemessa
     /**
      * Função para adicionar detalhe ao arquivo.
      *
-     * @param BoletoContract $detalhe
+     * @param PagamentoContract $detalhe
      * @return mixed
      */
     abstract public function addPagamento(PagamentoContract $detalhe);
@@ -432,6 +433,7 @@ abstract class AbstractRemessa
      * @param $f
      * @param $value
      * @return array
+     * @throws Exception
      */
     protected function add($i, $f, $value)
     {
@@ -473,17 +475,17 @@ abstract class AbstractRemessa
      *
      * @param array $a
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function valida(array $a)
     {
         if ($this->tamanho_linha === false) {
-            throw new \Exception('Classe remessa deve informar o tamanho da linha');
+            throw new Exception('Classe remessa deve informar o tamanho da linha');
         }
 
         $a = array_filter($a, 'strlen');
         if (count($a) != $this->tamanho_linha) {
-            throw new \Exception(sprintf('$a não possui %s posições, possui: %s', $this->tamanho_linha, count($a)));
+            throw new Exception(sprintf('$a não possui %s posições, possui: %s', $this->tamanho_linha, count($a)));
         }
 
         return implode('', $a);
@@ -492,11 +494,11 @@ abstract class AbstractRemessa
     /**
      * Gera o arquivo, retorna a string.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function gerar()
     {
-        throw new \Exception('Método não implementado');
+        throw new Exception('Método não implementado');
     }
 
     /**
@@ -504,7 +506,7 @@ abstract class AbstractRemessa
      *
      * @param $path
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function save($path)
     {
@@ -514,7 +516,7 @@ abstract class AbstractRemessa
         }
 
         if (!is_writable(dirname($path))) {
-            throw new \Exception('Path ' . $folder . ' não possui permissao de escrita');
+            throw new Exception('Path ' . $folder . ' não possui permissao de escrita');
         }
 
         $string = $this->gerar();
@@ -527,6 +529,7 @@ abstract class AbstractRemessa
      * Realiza o download da string retornada do metodo gerar
      *
      * @param null $filename
+     * @throws Exception
      */
     public function download($filename = null)
     {

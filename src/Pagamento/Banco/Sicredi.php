@@ -13,6 +13,7 @@ class Sicredi extends AbstractPagamento implements PagamentoContract
 {
     const INCLUSAO_REGISTRO_LIBERADO = '00';
     const EXCLUSAO_REGISTRO_INCLUIDO = '99';
+
     /**
      * Sicredi constructor.
      * @param array $params
@@ -22,6 +23,9 @@ class Sicredi extends AbstractPagamento implements PagamentoContract
         parent::__construct($params);
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getInstrucaoMovimento()
     {
         if ($this->getTipoMovimento() === PagamentoContract::TIPO_MOVIMENTO_EXCLUSAO)

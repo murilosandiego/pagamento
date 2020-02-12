@@ -3,10 +3,10 @@
 namespace Murilo\Pagamento\Pagamento;
 
 use Carbon\Carbon;
+use Exception;
 use Murilo\Pagamento\Contracts\Pessoa as PessoaContract;
 use Murilo\Pagamento\Contracts\Pagamento\Pagamento as PagamentoContract;
 use Murilo\Pagamento\Util;
-
 
 abstract class AbstractPagamento implements PagamentoContract
 {
@@ -281,12 +281,12 @@ abstract class AbstractPagamento implements PagamentoContract
     /**
      * @param $finalidade
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function setFinalidade($finalidade)
     {
         if (!in_array($finalidade, $this->getFinalidadesTED()))
-            throw new \Exception('Finalidade não encontrada');
+            throw new Exception('Finalidade não encontrada');
 
         $this->finalidade = $finalidade;
         return $this;
@@ -317,7 +317,7 @@ abstract class AbstractPagamento implements PagamentoContract
      * @param $favorecido
      *
      * @return AbstractPagamento
-     * @throws \Exception
+     * @throws Exception
      */
     public function setFavorecido($favorecido)
     {
@@ -458,11 +458,11 @@ abstract class AbstractPagamento implements PagamentoContract
     /**
      * Mostra exception ao erroneamente tentar setar o nosso número
      *
-     * @throws \Exception
+     * @throws Exception
      */
     final public function setNossoNumero()
     {
-        throw new \Exception('Não é possível definir o nosso número diretamente. Utilize o método setNumero.');
+        throw new Exception('Não é possível definir o nosso número diretamente. Utilize o método setNumero.');
     }
 
     /**

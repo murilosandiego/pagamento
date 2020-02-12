@@ -2,6 +2,7 @@
 
 namespace Murilo\Pagamento\Cnab\Remessa\Cnab240\Banco;
 
+use Exception;
 use Murilo\Pagamento\Cnab\Remessa\Cnab240\AbstractRemessa;
 use Murilo\Pagamento\Contracts\Boleto\Boleto as BoletoContract;
 use Murilo\Pagamento\Contracts\Pagamento\Pagamento as PagamentoContract;
@@ -48,6 +49,11 @@ class Sicredi extends AbstractRemessa implements RemessaContract
         '100' => '00806535',
         '096' => '00997185',
     ];
+
+    /**
+     * @var int
+     */
+    protected $somatorioValores;
 
     /**
      * Sicredi constructor.
@@ -155,7 +161,6 @@ class Sicredi extends AbstractRemessa implements RemessaContract
         return $this;
     }
 
-
     public function addPagamento(PagamentoContract $pagamento, $nSequencialLote = null)
     {
         $this->segmentoA($nSequencialLote + $nSequencialLote + 1, $pagamento);
@@ -166,10 +171,10 @@ class Sicredi extends AbstractRemessa implements RemessaContract
 
     /**
      * @param integer $nSequencialLote
-     * @param BoletoContract $pagamento
+     * @param PagamentoContract $pagamento
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     protected function segmentoA($nSequencialLote, PagamentoContract $pagamento)
     {
@@ -193,19 +198,19 @@ class Sicredi extends AbstractRemessa implements RemessaContract
         $this->add(44, 73, Util::formatCnab('X', $pagamento->getFavorecido()->getNome(), 30)); // Nome do pagador/Sacado
         $this->add(74, 93, Util::formatCnab(9, $pagamento->getNumeroDocumento(), 20)); // Nome do pagador/Sacado
         $this->add(94, 101, Util::formatCnab(9, $pagamento->getData()->format('dmY'), 8)); //Data pagamento
-        $this->add(102, 104, Util::formatCnab('X', $pagamento->getTipoMoeda(), 3)); //Data pagamento
-        $this->add(105, 119, Util::formatCnab(9, 0, 10)); //Data pagamento
-        $this->add(120, 134, Util::formatCnab(9, $pagamento->getValor(), 13, 2)); // Valor nominal do título
-        $this->add(135, 154, Util::formatCnab('X', '', 20)); //Data pagamento
-        $this->add(155, 162, Util::formatCnab(9, 0, 8)); //Data pagamento
-        $this->add(163, 177, Util::formatCnab(9, 0, 13)); //Data pagamento
-        $this->add(178, 217, ''); // Reservado (Uso Banco)
-        $this->add(218, 219, ''); // Reservado (Uso Banco)
-        $this->add(220, 224, Util::formatCnab('X', $pagamento->getFinalidade(), 5)); // Reservado (Uso Banco)
-        $this->add(225, 226, ''); // Reservado (Uso Banco)
-        $this->add(227, 229, ''); // Reservado (Uso Banco)
-        $this->add(230, 230, '0'); // Reservado (Uso Banco)
-        $this->add(231, 240, ''); // Reservado (Uso Banco)
+        $this->add(102, 104, Util::formatCnab('X', $pagamento->getTipoMoeda(), 3)); //Tipo da moeda
+        $this->add(105, 119, Util::formatCnab(9, 0, 10)); //Quantidade da moeda
+        $this->add(120, 134, Util::formatCnab(9, $pagamento->getValor(), 13, 2)); // Valor do pagamento/Valor nominal do título
+        $this->add(135, 154, Util::formatCnab('X', '', 20)); //No do docum. atribuído pelo banco
+        $this->add(155, 162, Util::formatCnab(9, 0, 8)); //Data real/Data real da efetivação pagto
+        $this->add(163, 177, Util::formatCnab(9, 0, 13)); //Valor real/Valor real da efetivação do pagto
+        $this->add(178, 217, ''); // Reservado (Uso Banco)/Outras informações – vide formatação em G031 para identificação de depósito judicial e pagto. salários de servidores pelo SIAPE
+        $this->add(218, 219, ''); // Reservado (Uso Banco)/Compl. tipo serviço
+        $this->add(220, 224, Util::formatCnab('X', $pagamento->getFinalidade(), 5)); // Reservado (Uso Banco)/Código finalidade da TED
+        $this->add(225, 226, ''); // Reservado (Uso Banco)/Complemento de finalidade pagto
+        $this->add(227, 229, ''); // Reservado (Uso Banco)/Uso exclusivo SICREDI
+        $this->add(230, 230, '0'); // Reservado (Uso Banco)/Aviso ao favorecido
+        $this->add(231, 240, ''); // Reservado (Uso Banco)/Códigos das ocorrências p/ retorno
 
         return $this;
     }
@@ -214,7 +219,7 @@ class Sicredi extends AbstractRemessa implements RemessaContract
      * @param integer $nSequencialLote
      * @param BoletoContract $pagamento
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function segmentoB($nSequencialLote, PagamentoContract $pagamento)
     {
@@ -251,7 +256,7 @@ class Sicredi extends AbstractRemessa implements RemessaContract
 
     /**
      * @return $this|mixed
-     * @throws \Exception
+     * @throws Exception
      */
     protected function header()
     {
@@ -288,7 +293,7 @@ class Sicredi extends AbstractRemessa implements RemessaContract
 
     /**
      * @return $this|mixed
-     * @throws \Exception
+     * @throws Exception
      */
     protected function headerLote()
     {
@@ -331,7 +336,7 @@ class Sicredi extends AbstractRemessa implements RemessaContract
      * Define o trailer de lote
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     protected function trailerLote()
     {
