@@ -194,8 +194,8 @@ class Sicredi extends AbstractRemessa implements RemessaContract
         $this->add(74, 93, Util::formatCnab(9, $pagamento->getNumeroDocumento(), 20)); // Nome do pagador/Sacado
         $this->add(94, 101, Util::formatCnab(9, $pagamento->getData()->format('dmY'), 8)); //Data pagamento
         $this->add(102, 104, Util::formatCnab('X', $pagamento->getTipoMoeda(), 3)); //Data pagamento
-        $this->add(105, 119, Util::formatCnab(9, 0, 10)); //Data pagamento
-        $this->add(120, 134, Util::formatCnab(9, $pagamento->getValor(), 13, 2)); // Valor nominal do título
+        $this->add(105, 119, Util::formatCnab(9, 0, 15)); //Data pagamento
+        $this->add(120, 134, Util::formatCnab(9, $pagamento->getValor(), 15, 2)); // Valor nominal do título
         $this->add(135, 154, Util::formatCnab('X', '', 20)); //Data pagamento
         $this->add(155, 162, Util::formatCnab(9, 0, 8)); //Data pagamento
         $this->add(163, 177, Util::formatCnab(9, 0, 13)); //Data pagamento
