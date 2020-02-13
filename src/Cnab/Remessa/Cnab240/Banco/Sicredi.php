@@ -62,7 +62,7 @@ class Sicredi extends AbstractRemessa implements RemessaContract
     public function __construct(array $params = [])
     {
         parent::__construct($params);
-        $this->addCampoObrigatorio('codigoCliente');
+        $this->addCampoObrigatorio(['codigoCliente', 'agenciaDv', 'idremessa']);
         $this->somatorioValores = 0;
     }
 
@@ -198,9 +198,9 @@ class Sicredi extends AbstractRemessa implements RemessaContract
         $this->add(44, 73, Util::formatCnab('X', $pagamento->getFavorecido()->getNome(), 30)); // Nome do pagador/Sacado
         $this->add(74, 93, Util::formatCnab(9, $pagamento->getNumeroDocumento(), 20)); // Nome do pagador/Sacado
         $this->add(94, 101, Util::formatCnab(9, $pagamento->getData()->format('dmY'), 8)); //Data pagamento
-        $this->add(102, 104, Util::formatCnab('X', $pagamento->getTipoMoeda(), 3)); //Tipo da moeda
-        $this->add(105, 119, Util::formatCnab(9, 0, 10)); //Quantidade da moeda
-        $this->add(120, 134, Util::formatCnab(9, $pagamento->getValor(), 13, 2)); // Valor do pagamento/Valor nominal do título
+        $this->add(102, 104, Util::formatCnab('X', $pagamento->getTipoMoeda(), 3)); //Data pagamento
+        $this->add(105, 119, Util::formatCnab(9, 0, 15)); //Quantidade da moeda
+        $this->add(120, 134, Util::formatCnab(9, $pagamento->getValor(), 15, 2)); // Valor do pagamento/Valor nominal do título
         $this->add(135, 154, Util::formatCnab('X', '', 20)); //No do docum. atribuído pelo banco
         $this->add(155, 162, Util::formatCnab(9, 0, 8)); //Data real/Data real da efetivação pagto
         $this->add(163, 177, Util::formatCnab(9, 0, 13)); //Valor real/Valor real da efetivação do pagto
