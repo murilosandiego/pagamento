@@ -1,6 +1,7 @@
 <?php
 namespace Murilo\Pagamento\Cnab\Remessa\Cnab240;
 
+use Exception;
 use Murilo\Pagamento\Cnab\Remessa\AbstractRemessa as AbstractRemessaGeneric;
 
 /**
@@ -112,17 +113,17 @@ abstract class AbstractRemessa extends AbstractRemessaGeneric
      * Gera o arquivo, retorna a string.
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function gerar()
     {
         if (!$this->isValid()) {
-            throw new \Exception('Campos requeridos pelo banco, aparentam estar ausentes');
+            throw new Exception('Campos requeridos pelo banco, aparentam estar ausentes');
         }
 
         $stringRemessa = '';
         if ($this->iRegistros < 1) {
-            throw new \Exception('Nenhuma linha detalhe foi adicionada');
+            throw new Exception('Nenhuma linha detalhe foi adicionada');
         }
 
         $this->header();
