@@ -32,6 +32,7 @@ abstract class AbstractRemessa
         'carteira',
         'agencia',
         'conta',
+        'contaDv',
         'beneficiario',
     ];
 

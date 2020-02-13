@@ -56,7 +56,7 @@ class Sicredi extends AbstractRemessa implements RemessaContract
     public function __construct(array $params = [])
     {
         parent::__construct($params);
-        $this->addCampoObrigatorio('codigoCliente');
+        $this->addCampoObrigatorio(['codigoCliente', 'agenciaDv', 'idremessa']);
         $this->somatorioValores = 0;
     }
 
