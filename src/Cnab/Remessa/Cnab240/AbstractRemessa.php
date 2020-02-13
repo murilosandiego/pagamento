@@ -117,8 +117,9 @@ abstract class AbstractRemessa extends AbstractRemessaGeneric
      */
     public function gerar()
     {
-        if (!$this->isValid()) {
-            throw new Exception('Campos requeridos pelo banco, aparentam estar ausentes');
+        $errors = '';
+        if (!$this->isValid($errors)) {
+            throw new Exception('Campos requeridos pelo banco, aparentam estar ausentes: ' . $errors);
         }
 
         $stringRemessa = '';

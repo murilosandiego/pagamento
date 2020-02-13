@@ -95,7 +95,6 @@ abstract class AbstractPagamento implements PagamentoContract
      */
     protected $contaDv;
 
-
     /**
      * Entidade favorecida
      *
@@ -103,11 +102,11 @@ abstract class AbstractPagamento implements PagamentoContract
      */
     protected $favorecido;
 
-
     /**
      * Construtor
      *
      * @param array $params Parâmetros iniciais para construção do objeto
+     * @throws Exception
      */
     public function __construct($params = [])
     {
@@ -195,7 +194,7 @@ abstract class AbstractPagamento implements PagamentoContract
     /**
      * Define o dígito da agência
      *
-     * @param  string $agenciaDv
+     * @param string $agenciaDv
      *
      * @return AbstractPagamento
      */
@@ -338,7 +337,7 @@ abstract class AbstractPagamento implements PagamentoContract
     /**
      * Define o número da conta
      *
-     * @param  string $conta
+     * @param string $conta
      *
      * @return AbstractPagamento
      */
@@ -362,7 +361,7 @@ abstract class AbstractPagamento implements PagamentoContract
     /**
      * Define o dígito verificador da conta
      *
-     * @param  string $contaDv
+     * @param string $contaDv
      *
      * @return AbstractPagamento
      */
@@ -386,7 +385,7 @@ abstract class AbstractPagamento implements PagamentoContract
     /**
      * Define o campo Número do documento
      *
-     * @param  int $numeroDocumento
+     * @param int $numeroDocumento
      *
      * @return AbstractPagamento
      */
@@ -410,7 +409,7 @@ abstract class AbstractPagamento implements PagamentoContract
     /**
      * Define a data de pagamento
      *
-     * @param  \Carbon\Carbon $data
+     * @param \Carbon\Carbon $data
      *
      * @return AbstractPagamento
      */
@@ -434,7 +433,7 @@ abstract class AbstractPagamento implements PagamentoContract
     /**
      * Define o valor
      *
-     * @param  string $valor
+     * @param string $valor
      *
      * @return AbstractPagamento
      */
@@ -480,7 +479,4 @@ abstract class AbstractPagamento implements PagamentoContract
         }
         return true;
     }
-
-
-
 }
