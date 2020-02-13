@@ -344,12 +344,14 @@ abstract class AbstractRemessa
     /**
      * Método que valida se o banco tem todos os campos obrigadotorios preenchidos
      *
+     * @param $messages
      * @return boolean
      */
-    public function isValid()
+    public function isValid(&$messages)
     {
         foreach ($this->camposObrigatorios as $campo) {
             if (call_user_func([$this, 'get' . ucwords($campo)]) == '') {
+                $messages .= "Campo $campo está em branco. ";
                 return false;
             }
         }
