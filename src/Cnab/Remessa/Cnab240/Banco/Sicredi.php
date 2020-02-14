@@ -25,30 +25,6 @@ class Sicredi extends AbstractRemessa implements RemessaContract
     const CH_CHEQUE = 97;
     const ND_NOTA_PROMISSORIA_DIRETA = 98;
 
-    const ISPB = [
-        '001' => '00000000',
-        '237' => '60746948',
-        '260' => '18236120',
-        '637' => '60889128',
-        '077' => '00416968',
-        '341' => '60701190',
-        '104' => '00360305',
-        '033' => '90400888',
-        '212' => '92894922',
-        '756' => '02038232',
-        '655' => '59588111',
-        '041' => '92702067',
-        '389' => '17184037',
-        '422' => '58160789',
-        '070' => '00000208',
-        '136' => '00315557',
-        '741' => '00517645',
-        '739' => '00558456',
-        '743' => '00795423',
-        '100' => '00806535',
-        '096' => '00997185',
-    ];
-
     /**
      * Sicredi constructor.
      * @param array $params
@@ -183,7 +159,7 @@ class Sicredi extends AbstractRemessa implements RemessaContract
         $this->add(14, 14, Util::formatCnab('9', 'A', 1)); // Código de segmento do reg. detalhe
         $this->add(15, 15, Util::formatCnab('9', $pagamento->getTipoMovimento(), 1)); // Código de segmento do reg. detalhe
         $this->add(16, 17, Util::formatCnab(9, $pagamento->getTipoMovimento(), 2)); // Código de movimento remessa
-        $this->add(18, 20, Util::formatCnab(9, '018', 3));
+        $this->add(18, 20, Util::formatCnab(9, '888', 3));
         $this->add(21, 23, Util::formatCnab(9, $pagamento->getBanco(), 3)); // Numero da conta corrente
         $this->add(24, 28, Util::formatCnab(9, $pagamento->getAgencia(), 5)); // Numero da conta corrente
         $this->add(29, 29, Util::formatCnab('X', $pagamento->getAgenciaDv(), 1)); // Numero da conta corrente
@@ -246,7 +222,7 @@ class Sicredi extends AbstractRemessa implements RemessaContract
         $this->add(211, 225, Util::formatCnab(9, Util::onlyNumbers($pagamento->getFavorecido()->getDocumento()), 15)); // Tipo de inscrição do sacado
         $this->add(226, 226, Util::formatCnab(9, 0, 1)); // Identificador de carne 000 - Não possui, 001 - Possui Carné
         $this->add(227, 232, Util::formatCnab(9, 0, 6)); // Sequencial da parcela
-        $this->add(233, 240, Util::formatCnab(9, 0, 8)); // Reservado (Uso Banco)
+        $this->add(233, 240, Util::formatCnab(9, self::ISPB[$pagamento->getBanco()], 8)); // Reservado (Uso Banco)
     }
 
     /**
