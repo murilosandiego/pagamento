@@ -1,6 +1,6 @@
 # Pagamento, Remessa e Retorno PHP
 Pacote para gerar pagamentos através de arquivos de remessas e leitura de 
-retorno. Fork do projeto [yii2-boleto-remessa](http://newerton.github.io/yii2-boleto-remessa/)
+retorno.
 
 ## Requerimentos
 - [PHP Extensão Intl](http://php.net/manual/pt_BR/book.intl.php)
