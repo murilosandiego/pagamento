@@ -253,31 +253,6 @@ class Sicredi extends AbstractRetorno implements RetornoCnab240
                 ->setConta($this->rem(30, 41, $detalhe))
                 ->setContaDv($this->rem(42, 42, $detalhe));
 
-            /**
-             * ocorrencias
-             */
-            if ($d->hasOcorrencia('00', '03', 'BQ', 'ZK')) {
-                $this->totais['liquidados']++;
-                $d->setOcorrenciaTipo($d::OCORRENCIA_LIQUIDADA);
-            } elseif ($d->hasOcorrencia('BD', 'BN')) {
-                $this->totais['entradas']++;
-                $d->setOcorrenciaTipo($d::OCORRENCIA_ENTRADA);
-            } elseif ($d->hasOcorrencia('14', '40', 'K2')) {
-                $this->totais['protestados']++;
-                $d->setOcorrenciaTipo($d::OCORRENCIA_PROTESTADA);
-            } elseif ($d->hasOcorrencia('BE', 'BO')) {
-                $this->totais['alterados']++;
-                $d->setOcorrenciaTipo($d::OCORRENCIA_ALTERACAO);
-            } elseif ($d->hasOcorrencia('BF', 'BP')) {
-                $this->totais['excluidos']++;
-                $d->setOcorrenciaTipo($d::OCORRENCIA_BAIXADA);
-            } else {
-                if (isset($this->ocorrencias[$d->getOcorrencia()])) {
-                    $d->setError($this->ocorrencias[$d->getOcorrencia()]);
-                }
-
-                $d->setOcorrenciaTipo($d::OCORRENCIA_OUTROS);
-            }
         }
 
         if ($this->getSegmentType($detalhe) == 'B') {
@@ -319,6 +294,36 @@ class Sicredi extends AbstractRetorno implements RetornoCnab240
                 ->setValorRecebido(Util::nFloat($this->rem(93, 107, $detalhe)/100, 2, false))
                 ->setDataOcorrencia($this->rem(138, 145, $detalhe))
                 ->setDataCredito($this->rem(146, 153, $detalhe));
+        }
+
+        if ($this->getSegmentType($detalhe) == 'Z') {
+            $d->setOcorrencia($this->rem(231, 240, $detalhe));
+        }
+
+        /**
+         * ocorrencias
+         */
+        if ($d->hasOcorrencia('00', '03', 'BQ', 'ZK')) {
+            $this->totais['liquidados']++;
+            $d->setOcorrenciaTipo($d::OCORRENCIA_LIQUIDADA);
+        } elseif ($d->hasOcorrencia('BD', 'BN')) {
+            $this->totais['entradas']++;
+            $d->setOcorrenciaTipo($d::OCORRENCIA_ENTRADA);
+        } elseif ($d->hasOcorrencia('14', '40', 'K2')) {
+            $this->totais['protestados']++;
+            $d->setOcorrenciaTipo($d::OCORRENCIA_PROTESTADA);
+        } elseif ($d->hasOcorrencia('BE', 'BO')) {
+            $this->totais['alterados']++;
+            $d->setOcorrenciaTipo($d::OCORRENCIA_ALTERACAO);
+        } elseif ($d->hasOcorrencia('BF', 'BP')) {
+            $this->totais['excluidos']++;
+            $d->setOcorrenciaTipo($d::OCORRENCIA_BAIXADA);
+        } else {
+            if (isset($this->ocorrencias[$d->getOcorrencia()])) {
+                $d->setError($this->ocorrencias[$d->getOcorrencia()]);
+            }
+
+            $d->setOcorrenciaTipo($d::OCORRENCIA_OUTROS);
         }
 
         return true;
