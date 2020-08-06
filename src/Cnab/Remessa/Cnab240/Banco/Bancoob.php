@@ -96,6 +96,8 @@ class Bancoob extends AbstractRemessa implements RemessaContract
 
     protected $agenciaDv;
 
+    private $sequenciaSegmento = 0;
+
     /**
      * Retorna o codigo do cliente.
      *
@@ -139,8 +141,10 @@ class Bancoob extends AbstractRemessa implements RemessaContract
 
     public function addPagamento(PagamentoContract $pagamento, $nSequencialLote = null)
     {
-        $this->segmentoA($nSequencialLote + $nSequencialLote + 1, $pagamento);
-        $this->segmentoB($nSequencialLote + $nSequencialLote + 2, $pagamento);
+        $this->sequenciaSegmento++;
+        $this->segmentoA($nSequencialLote + $nSequencialLote + $this->sequenciaSegmento, $pagamento);
+        $this->sequenciaSegmento++;
+        $this->segmentoB($nSequencialLote + $nSequencialLote + $this->sequenciaSegmento, $pagamento);
 
         return $this;
     }
