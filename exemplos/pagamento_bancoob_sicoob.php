@@ -40,6 +40,24 @@ $pagamento = new Murilo\Pagamento\Pagamento\Banco\Bancoob(
     ]
 );
 
+$pagamento2 = new Murilo\Pagamento\Pagamento\Banco\Bancoob(
+    [
+        'data' => new \Carbon\Carbon(),
+        'finalidade' => '00011',
+        'valor' => 10,
+        'numeroDocumento' => 1,
+        'banco' => 237,
+        'agencia' => 9999,
+        'conta' => 999999,
+        'contaDv' => 9,
+        'favorecido' => $favorecido
+    ]
+);
+
+$pagamentos = [];
+$pagamentos[] = $pagamento;
+$pagamentos[] = $pagamento2;
+
 $remessa = new \Murilo\Pagamento\Cnab\Remessa\Cnab240\Banco\Bancoob(
     [
         'agencia'      => 9999,
@@ -53,7 +71,7 @@ $remessa = new \Murilo\Pagamento\Cnab\Remessa\Cnab240\Banco\Bancoob(
     ]
 );
 
-$remessa->addPagamento($pagamento);
+$remessa->addPagamentos($pagamentos);
 
 $hoje = new \DateTime();
 
