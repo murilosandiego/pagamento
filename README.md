@@ -7,7 +7,12 @@ retorno.
 
 
 ## Bancos suportados
-Atualmente apenas o banco Sicredi é suportado na modalidade TED – Transferência entre Clientes;
+Banco | Transferências entre contas | Pagamento de Títulos de Cobrança | Pagamento de Convênios e Tributos | Importação de folha de pagamento
+----- | :---: | :---: | :---: | :---: |
+ Sicredi | :white_check_mark: | | | |
+ Bancoob (Sicoob) | :white_check_mark: | | | |
+
+**\:eight_pointed_black_star: necessita de homologação**
 
 ## Instalação
 Via composer:
